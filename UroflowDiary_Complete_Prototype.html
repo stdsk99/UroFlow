@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#164f86">
+<title>UroFlow Diary | สมุดบันทึกอาการปัสสาวะ</title>
+<style>
+:root{--blue:#164f86;--blue2:#eaf3fb;--ink:#183044;--muted:#52697a;--line:#d4e0e9;--bg:#f3f7fa;--white:#fff;--red:#9c2828;--redbg:#fff0f0;--green:#176344;--greenbg:#eaf7ef;--amber:#805700;--amberbg:#fff6df;--shadow:0 4px 18px #193d570c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+header{background:linear-gradient(120deg,#164f86,#2475ad);color:#fff;padding:22px max(16px,calc((100% - 1120px)/2))}header h1{margin:0;font-size:clamp(27px,4vw,36px)}header p{margin:4px 0 0;font-size:16px}
+main{max-width:1120px;margin:20px auto;padding:0 14px 42px}.banner{border:1px solid #e8d18b;background:var(--amberbg);color:#5d480f;border-radius:15px;padding:14px 16px;margin-bottom:16px;font-size:15px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tab{font:inherit;font-weight:750;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--blue);padding:12px 15px;cursor:pointer;min-height:48px}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,26px);margin-bottom:16px;box-shadow:var(--shadow)}.panel h2{font-size:25px;margin:0 0 14px}.panel h3{font-size:20px;margin:20px 0 9px}.muted,.hint,small{color:var(--muted);font-size:15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field{min-width:0}.full{grid-column:1/-1}label,.label{display:block;font-weight:750;margin-bottom:6px}
+input,select,textarea{font:inherit;color:var(--ink);width:100%;min-height:49px;border:1px solid #9bb0c1;border-radius:11px;padding:11px 12px;background:#fff}textarea{min-height:95px;resize:vertical}input[type=checkbox],input[type=radio]{width:21px;height:21px;min-height:0;accent-color:var(--blue);margin:0;flex:0 0 auto}
+.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;min-height:47px;font-weight:500;cursor:pointer}.choice:has(input:checked){border-color:#78a9d3;background:var(--blue2)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{font:inherit;font-weight:750;border:0;border-radius:12px;padding:12px 17px;min-height:48px;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:var(--blue2);color:var(--blue);border:1px solid #c6dced}.danger{background:var(--redbg);color:var(--red);border:1px solid #efcaca}.good{background:var(--greenbg);color:var(--green);border:1px solid #c6e5d1}
+.status{margin-top:12px;font-weight:700;color:var(--green);min-height:0}.hidden{display:none!important}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px}.stat strong{display:block;font-size:27px;color:var(--blue)}.stat span{font-size:14px;color:var(--muted)}
+.record{border:1px solid var(--line);border-radius:14px;padding:15px;margin:11px 0;background:#fff}.record h3{margin:0 0 7px}.record p{margin:6px 0}.recordhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.tags{display:flex;gap:5px;flex-wrap:wrap}.tag{display:inline-block;background:var(--blue2);color:var(--blue);border-radius:7px;padding:2px 8px;font-size:14px}.empty{background:#f7fafc;border-radius:12px;padding:24px;text-align:center;color:var(--muted)}.divider{height:1px;background:var(--line);margin:18px 0}
+.trendrow{display:grid;grid-template-columns:135px 1fr 75px;align-items:center;gap:10px;margin:10px 0}.barbg{height:16px;background:#e8eef3;border-radius:10px;overflow:hidden}.bar{height:100%;background:#2d80b9;border-radius:10px}.dangertext{color:var(--red);font-weight:750}
+footer{max-width:1120px;margin:auto;padding:0 18px 28px;color:var(--muted);font-size:14px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.tab{flex:1;padding:10px 7px;font-size:15px}.recordhead{display:block}.recordhead .actions{margin-top:10px}.trendrow{grid-template-columns:100px 1fr 55px;font-size:15px}}
+@media print{body{background:#fff;font-size:11pt}header{background:#fff;color:#111;padding:0 0 12px;border-bottom:2px solid #333}main{max-width:none;margin:0;padding:0}.banner,nav,.no-print,footer{display:none!important}.panel{box-shadow:none;border:0;padding:8px 0;margin:0}.panel h2{font-size:17pt}.record{break-inside:avoid}.cards{display:none}.print-report{display:block!important}.record h3{font-size:12pt}.tag{border:1px solid #aaa;background:white;color:#111}}
+</style>
+</head>
+<body>
+<header>
+  <h1>UroFlow Diary</h1>
+  <p>สมุดบันทึกอาการปัสสาวะและประวัติยา สำหรับนำข้อมูลไปปรึกษาแพทย์</p>
+</header>
+<main>
+  <div class="banner"><strong>รุ่นต้นแบบสำหรับทดสอบเท่านั้น</strong> — ข้อมูลเก็บในเบราว์เซอร์ของอุปกรณ์นี้ ไม่ส่งไปยังเซิร์ฟเวอร์ แต่ GitHub Pages เป็นเว็บไซต์สาธารณะ และเบราว์เซอร์ไม่ได้เข้ารหัสข้อมูลแอปให้อัตโนมัติ โปรดใช้ข้อมูลสมมติในการทดลองเท่านั้น ห้ามใช้ข้อมูลสุขภาพจริงจนกว่าจะมีการตรวจสอบความปลอดภัยและการกู้คืนข้อมูล</div>
+  <nav class="no-print" aria-label="เมนูหลัก">
+    <button class="tab active" data-tab="home">ภาพรวม</button>
+    <button class="tab" data-tab="daily">บันทึกประจำวัน</button>
+    <button class="tab" data-tab="history">ประวัติอาการ</button>
+    <button class="tab" data-tab="meds">ประวัติยา</button>
+    <button class="tab" data-tab="report">รายงาน / ข้อมูล</button>
+  </nav>
+
+  <section id="home" class="panel">
+    <h2>ภาพรวมการบันทึก</h2>
+    <p class="muted">ใช้หน้านี้ดูว่ามีข้อมูลบันทึกไว้เท่าใด และเริ่มบันทึกได้ทันที</p>
+    <div class="cards">
+      <div class="stat"><strong id="statDays">0</strong><span>วันที่มีบันทึก</span></div>
+      <div class="stat"><strong id="statMeds">0</strong><span>เหตุการณ์เกี่ยวกับยา</span></div>
+      <div class="stat"><strong id="statNight">—</strong><span>ตื่นปัสสาวะกลางคืนล่าสุด</span></div>
+      <div class="stat"><strong id="statFlow">—</strong><span>ความแรงล่าสุด</span></div>
+    </div>
+    <h3>บันทึกล่าสุด</h3><div id="recentList"></div>
+    <div class="actions no-print"><button class="btn primary" data-goto="daily">+ บันทึกอาการวันนี้</button><button class="btn secondary" data-goto="meds">+ บันทึกเหตุการณ์ยา</button><button class="btn secondary" data-goto="report">ดูรายงาน / สำรองข้อมูล</button></div>
+    <div class="divider"></div>
+    <h3>คำเตือนเพื่อความปลอดภัย</h3>
+    <p>หากปัสสาวะไม่ออกเฉียบพลัน ให้ไปห้องฉุกเฉิน หากมีเลือดปนในปัสสาวะหรืออาการรุนแรง ควรรับการประเมินจากบุคลากรทางการแพทย์ แอปนี้ไม่วินิจฉัยโรคและไม่แนะนำให้หยุดหรือปรับยาเอง</p>
+  </section>
+
+  <section id="daily" class="panel hidden">
+    <h2>บันทึกอาการประจำวัน</h2>
+    <p class="muted">กรอกเท่าที่ทราบ หากยังไม่ทราบให้เว้นว่างไว้ ไม่ต้องใส่ 0 แทนข้อมูลที่ไม่มี</p>
+    <form id="dailyForm">
+      <div class="grid">
+        <div class="field"><label for="logDate">วันที่บันทึก *</label><input id="logDate" type="date" required></div>
+        <div class="field"><label for="water">ปริมาณน้ำดื่มรวม (มิลลิลิตร)</label><input id="water" type="number" min="0" max="20000" step="50" placeholder="เช่น 1500"></div>
+        <div class="field full"><span class="label">ความแรงของปัสสาวะ *</span><div class="choices">
+          <label class="choice"><input type="radio" name="flow" value="ไหลช้า" required>ไหลช้า</label>
+          <label class="choice"><input type="radio" name="flow" value="ค่อนข้างช้า">ค่อนข้างช้า</label>
+          <label class="choice"><input type="radio" name="flow" value="ปานกลาง">ปานกลาง</label>
+          <label class="choice"><input type="radio" name="flow" value="ค่อนข้างดี">ค่อนข้างดี</label>
+          <label class="choice"><input type="radio" name="flow" value="พุ่งดี">พุ่งดี</label>
+        </div><small>การประเมินด้วยตนเอง ไม่ใช่ผลตรวจ Uroflowmetry</small></div>
+        <div class="field full"><span class="label">ต้องเบ่งขณะปัสสาวะหรือไม่? *</span><div class="choices">
+          <label class="choice"><input type="radio" name="strain" value="ไม่ต้องเบ่ง" required>ไม่ต้องเบ่ง</label>
+          <label class="choice"><input type="radio" name="strain" value="เบ่งเล็กน้อย">เบ่งเล็กน้อย</label>
+          <label class="choice"><input type="radio" name="strain" value="เบ่งนาน">เบ่งนาน</label>
+        </div></div>
+        <div class="field full"><span class="label">รู้สึกปัสสาวะไม่สุดหรือไม่? *</span><div class="choices">
+          <label class="choice"><input type="radio" name="incomplete" value="ไม่" required>ไม่</label>
+          <label class="choice"><input type="radio" name="incomplete" value="ใช่">ใช่</label>
+          <label class="choice"><input type="radio" name="incomplete" value="ไม่แน่ใจ">ไม่แน่ใจ</label>
+        </div></div>
+        <div class="field"><label for="dayCount">จำนวนครั้งที่ปัสสาวะกลางวัน</label><input id="dayCount" type="number" min="0" max="100" step="1" placeholder="จำนวนครั้ง"></div>
+        <div class="field"><label for="nightCount">จำนวนครั้งที่ตื่นมาปัสสาวะกลางคืน</label><input id="nightCount" type="number" min="0" max="30" step="1" placeholder="จำนวนครั้ง"></div>
+        <div class="field full"><span class="label">อาการอื่น ๆ (เลือกได้หลายข้อ)</span><div class="choices">
+          <label class="choice"><input type="checkbox" name="symptoms" value="ปวดปัสสาวะเร่งด่วน">ปวดปัสสาวะเร่งด่วน</label>
+          <label class="choice"><input type="checkbox" name="symptoms" value="ปวด/แสบขณะปัสสาวะ">ปวด/แสบขณะปัสสาวะ</label>
+          <label class="choice"><input type="checkbox" name="symptoms" value="ปัสสาวะเล็ด">ปัสสาวะเล็ด</label>
+          <label class="choice"><input type="checkbox" name="symptoms" value="ไม่มีอาการอื่น">ไม่มีอาการอื่น</label>
+        </div></div>
+        <div class="field full"><span class="label">การใช้ยาในวันนี้ *</span><div class="choices">
+          <label class="choice"><input type="radio" name="medAdherence" value="ใช้ตามแผน" required>ใช้ตามแผน</label>
+          <label class="choice"><input type="radio" name="medAdherence" value="ลืมยา">ลืมยา</label>
+          <label class="choice"><input type="radio" name="medAdherence" value="หยุด/เปลี่ยนยาตามคำแนะนำ">หยุด/เปลี่ยนยาตามคำแนะนำ</label>
+          <label class="choice"><input type="radio" name="medAdherence" value="ไม่ได้ใช้ยา">ไม่ได้ใช้ยา</label>
+        </div></div>
+        <div class="field full"><label for="impact">ผลกระทบต่อชีวิตประจำวัน</label><select id="impact"><option value="">ยังไม่ได้บันทึก</option><option>ไม่มีผลกระทบ</option><option>เล็กน้อย</option><option>ปานกลาง</option><option>มาก</option></select></div>
+        <div class="field full"><label for="notes">หมายเหตุเพิ่มเติม</label><textarea id="notes" placeholder="เช่น อาการที่สังเกตได้ หรือสิ่งที่อยากแจ้งแพทย์"></textarea></div>
+      </div>
+      <div class="actions no-print"><button class="btn primary" type="submit">บันทึกข้อมูล</button><button class="btn secondary" type="button" id="clearDaily">ล้างแบบฟอร์ม</button><button class="btn secondary" type="button" id="cancelEditDaily">ยกเลิกการแก้ไข</button></div>
+      <div id="dailyStatus" class="status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section id="history" class="panel hidden">
+    <h2>ประวัติอาการ</h2>
+    <div class="grid no-print">
+      <div class="field"><label for="historyFrom">ตั้งแต่วันที่</label><input id="historyFrom" type="date"></div>
+      <div class="field"><label for="historyTo">ถึงวันที่</label><input id="historyTo" type="date"></div>
+    </div>
+    <div class="actions no-print"><button class="btn secondary" id="filterHistory">กรองข้อมูล</button><button class="btn secondary" id="clearHistoryFilter">แสดงทั้งหมด</button></div>
+    <div id="historyList"></div>
+    <div class="divider"></div><h3>แนวโน้มจากข้อมูลที่บันทึก</h3><p class="hint">กราฟนี้เป็นเพียงสรุปค่าที่ผู้ใช้รายงาน ไม่ใช่การแปลผลทางการแพทย์</p><div id="trends"></div>
+  </section>
+
+  <section id="meds" class="panel hidden">
+    <h2>ประวัติยา</h2>
+    <p class="muted">บันทึกทุกเหตุการณ์แยกกัน ประวัติเดิมจะไม่ถูกลบเมื่อหยุดยาแล้วเริ่มใหม่</p>
+    <form id="medForm">
+      <input type="hidden" id="medId">
+      <div class="grid">
+        <div class="field"><label for="medName">ชื่อยา *</label><input id="medName" required placeholder="ชื่อยาตามฉลาก"></div>
+        <div class="field"><label for="medDose">ขนาดยา / วิธีใช้</label><input id="medDose" placeholder="ตามฉลากหรือคำสั่งแพทย์"></div>
+        <div class="field"><label for="medDate">วันที่เกิดเหตุการณ์ *</label><input id="medDate" type="date" required></div>
+        <div class="field"><label for="medEvent">เหตุการณ์ *</label><select id="medEvent" required><option value="เริ่มใช้ยา">เริ่มใช้ยา</option><option value="หยุดยา">หยุดยา</option><option value="เริ่มใช้ใหม่">เริ่มใช้ใหม่</option><option value="เปลี่ยนขนาดยา">เปลี่ยนขนาดยา</option><option value="เปลี่ยนยา">เปลี่ยนยา</option></select></div>
+        <div class="field full"><label for="medReason">เหตุผล / ผู้แนะนำให้หยุดหรือเปลี่ยน</label><input id="medReason" placeholder="เช่น แพทย์แนะนำ หรือเหตุผลที่บันทึกไว้"></div>
+        <div class="field full"><label for="medNotes">อาการ / หมายเหตุ</label><textarea id="medNotes" placeholder="ข้อมูลเพิ่มเติม (ถ้ามี)"></textarea></div>
+      </div>
+      <div class="actions no-print"><button class="btn primary" type="submit" id="medSubmit">เพิ่มเหตุการณ์ยา</button><button class="btn secondary" type="button" id="cancelMedEdit">ยกเลิกการแก้ไข</button><button class="btn secondary" type="reset">ล้างแบบฟอร์ม</button></div>
+      <div id="medStatus" class="status" role="status" aria-live="polite"></div>
+    </form>
+    <h3>ไทม์ไลน์เหตุการณ์ยา</h3><div id="medList"></div>
+  </section>
+
+  <section id="report" class="panel hidden">
+    <h2>รายงานสำหรับแพทย์</h2>
+    <p>เลือกช่วงวันที่เพื่อสร้างรายงานอาการและประวัติยา แล้วเลือก “บันทึกเป็น PDF” ในหน้าต่างพิมพ์</p>
+    <div class="grid no-print">
+      <div class="field"><label for="reportFrom">ตั้งแต่วันที่</label><input id="reportFrom" type="date"></div>
+      <div class="field"><label for="reportTo">ถึงวันที่</label><input id="reportTo" type="date"></div>
+      <div class="field full"><label for="patientLabel">ชื่อหรือรหัสอ้างอิง (ไม่บังคับ)</label><input id="patientLabel" placeholder="เว้นว่างได้; ใช้รหัสแทนชื่อเพื่อความเป็นส่วนตัว"></div>
+    </div>
+    <div class="actions no-print">
+      <button class="btn primary" id="makeReport">สร้างรายงาน / บันทึก PDF</button>
+      <button class="btn secondary" id="exportData">ดาวน์โหลดไฟล์สำรอง JSON</button>
+      <label class="btn secondary" for="importFile">กู้คืนไฟล์สำรอง</label><input id="importFile" type="file" accept=".json,application/json" hidden>
+      <button class="btn danger" id="deleteAll">ลบข้อมูลทั้งหมดในเบราว์เซอร์นี้</button>
+    </div>
+    <div id="reportStatus" class="status" role="status" aria-live="polite"></div>
+    <div id="reportContent" class="hidden print-report"></div>
+    <div class="divider no-print"></div>
+    <h3 class="no-print">ข้อจำกัดการเก็บข้อมูล</h3>
+    <ul class="no-print">
+      <li>ข้อมูลอยู่ในเบราว์เซอร์และอุปกรณ์ที่ใช้งาน หากล้างข้อมูลเว็บไซต์ เปลี่ยนเบราว์เซอร์ หรืออุปกรณ์ ข้อมูลอาจหายหรือไม่ปรากฏ</li>
+      <li>ไฟล์ JSON สำรองมีข้อมูลทั้งหมดและไม่ได้เข้ารหัส ควรเก็บในตำแหน่งปลอดภัย</li>
+      <li>การลบข้อมูลจากหน้าเว็บไม่รับประกันว่าข้อมูลจะถูกลบจากสำเนาสำรองหรือระบบสำรองข้อมูลของอุปกรณ์</li>
+      <li>ยังไม่มีการล็อกแอปที่ปลอดภัยหรือการเข้ารหัสฐานข้อมูลในรุ่น HTML นี้</li>
+    </ul>
+    <div class="banner no-print"><strong>คำเตือนทางการแพทย์:</strong> แอปนี้ไม่วินิจฉัยโรค ไม่ใช่ผลตรวจ Uroflowmetry และไม่แนะนำให้หยุดหรือปรับยาเอง หากปัสสาวะไม่ออกเฉียบพลัน ให้ไปห้องฉุกเฉิน หากมีเลือดปนในปัสสาวะหรืออาการรุนแรง ควรรับการประเมินจากบุคลากรทางการแพทย์</div>
+  </section>
+</main>
+<footer>UroFlow Diary — ต้นแบบเพื่อประเมินขั้นตอนการใช้งานเท่านั้น ไม่ใช่อุปกรณ์ทางการแพทย์หรือเครื่องมือวินิจฉัย</footer>
+<script>
+(function(){
+'use strict';
+const KEY='uroflowDiaryPrototype_v2';
+const $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+let data={daily:[],meds:[]}, editingDailyDate=null, editingMedId=null;
+try{const raw=localStorage.getItem(KEY);if(raw){const p=JSON.parse(raw);if(p&&Array.isArray(p.daily)&&Array.isArray(p.meds))data=p;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch(e){alert('บันทึกไม่ได้ พื้นที่จัดเก็บเบราว์เซอร์อาจเต็ม โปรดส่งออกข้อมูลสำรองและตรวจสอบอุปกรณ์');return false}}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function dateTH(v){if(!v)return 'ยังไม่ได้บันทึก';const a=v.split('-');return a.length===3?`${a[2]}/${a[1]}/${a[0]}`:v}
+function radio(form,name){const el=form.querySelector(`input[name="${name}"]:checked`);return el?el.value:''}
+function showTab(id){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hidden',s.id!==id));if(id==='home')renderHome();if(id==='history'){renderHistory();renderTrends()}if(id==='meds')renderMeds()}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.goto)));
+$('logDate').value=today();$('medDate').value=today();
+function dailyFormToEntry(){const f=$('dailyForm');return {date:$('logDate').value,water:$('water').value,flow:radio(f,'flow'),strain:radio(f,'strain'),incomplete:radio(f,'incomplete'),dayCount:$('dayCount').value,nightCount:$('nightCount').value,symptoms:[...f.querySelectorAll('input[name="symptoms"]:checked')].map(x=>x.value),medAdherence:radio(f,'medAdherence'),impact:$('impact').value,notes:$('notes').value,updatedAt:new Date().toISOString()}}
+function fillDaily(x){const f=$('dailyForm');editingDailyDate=x.date;$('logDate').value=x.date;$('water').value=x.water??'';$('dayCount').value=x.dayCount??'';$('nightCount').value=x.nightCount??'';$('impact').value=x.impact||'';$('notes').value=x.notes||'';['flow','strain','incomplete','medAdherence'].forEach(n=>f.querySelectorAll(`input[name="${n}"]`).forEach(el=>el.checked=el.value===x[n]));f.querySelectorAll('input[name="symptoms"]').forEach(el=>el.checked=(x.symptoms||[]).includes(el.value));$('dailyStatus').textContent='กำลังแก้ไขข้อมูลวันที่ '+dateTH(x.date);showTab('daily');window.scrollTo({top:0,behavior:'smooth'});}
+$('dailyForm').addEventListener('submit',e=>{e.preventDefault();const x=dailyFormToEntry();if(!x.date)return;const i=data.daily.findIndex(a=>a.date===x.date);if(i>=0&&editingDailyDate!==x.date&&!confirm('วันที่นี้มีข้อมูลแล้ว ต้องการแทนที่ข้อมูลเดิมหรือไม่?'))return;if(i>=0)data.daily[i]=x;else data.daily.push(x);data.daily.sort((a,b)=>b.date.localeCompare(a.date));editingDailyDate=null;if(save()){$('dailyStatus').textContent='บันทึกเรียบร้อยแล้ว';renderHome();renderHistory();renderTrends();}});
+function clearDaily(){editingDailyDate=null;$('dailyForm').reset();$('logDate').value=today();$('dailyStatus').textContent='';}
+$('clearDaily').addEventListener('click',clearDaily);$('cancelEditDaily').addEventListener('click',clearDaily);
+function renderHome(){const sorted=data.daily.slice().sort((a,b)=>b.date.localeCompare(a.date));$('statDays').textContent=data.daily.length;$('statMeds').textContent=data.meds.length;$('statNight').textContent=sorted.length&&sorted[0].nightCount!==''?sorted[0].nightCount+' ครั้ง':'—';$('statFlow').textContent=sorted.length?(sorted[0].flow||'ยังไม่บันทึก'):'—';const box=$('recentList');if(!sorted.length){box.innerHTML='<div class="empty">ยังไม่มีบันทึก เริ่มได้จากปุ่ม “บันทึกอาการวันนี้”</div>';return}box.innerHTML=sorted.slice(0,3).map(x=>`<article class="record"><h3>${dateTH(x.date)}</h3><div class="tags"><span class="tag">ความแรง: ${esc(x.flow||'ยังไม่บันทึก')}</span><span class="tag">กลางวัน: ${x.dayCount!==''?esc(x.dayCount)+' ครั้ง':'ยังไม่บันทึก'}</span><span class="tag">กลางคืน: ${x.nightCount!==''?esc(x.nightCount)+' ครั้ง':'ยังไม่บันทึก'}</span></div></article>`).join('')}
+function selectedHistory(){const f=$('historyFrom').value,t=$('historyTo').value;return data.daily.filter(x=>(!f||x.date>=f)&&(!t||x.date<=t)).slice().sort((a,b)=>b.date.localeCompare(a.date))}
+function renderHistory(){const arr=selectedHistory(),box=$('historyList');if(!arr.length){box.innerHTML='<div class="empty">ไม่มีข้อมูลในช่วงวันที่นี้ หรือยังไม่มีข้อมูลบันทึก</div>';return}box.innerHTML=arr.map(x=>`<article class="record"><div class="recordhead"><div><h3>${dateTH(x.date)}</h3><div class="tags"><span class="tag">ความแรง: ${esc(x.flow||'ยังไม่บันทึก')}</span><span class="tag">กลางวัน: ${x.dayCount!==''?esc(x.dayCount)+' ครั้ง':'ยังไม่บันทึก'}</span><span class="tag">กลางคืน: ${x.nightCount!==''?esc(x.nightCount)+' ครั้ง':'ยังไม่บันทึก'}</span></div></div><div class="actions no-print"><button class="btn secondary" data-editday="${esc(x.date)}">แก้ไข</button><button class="btn danger" data-delday="${esc(x.date)}">ลบ</button></div></div><p><strong>การเบ่ง:</strong> ${esc(x.strain||'ยังไม่บันทึก')}　<strong>ปัสสาวะไม่สุด:</strong> ${esc(x.incomplete||'ยังไม่บันทึก')}</p><p><strong>น้ำดื่ม:</strong> ${x.water!==''?esc(x.water)+' มล.':'ยังไม่บันทึก'}　<strong>การใช้ยา:</strong> ${esc(x.medAdherence||'ยังไม่บันทึก')}</p><p><strong>อาการอื่น:</strong> ${esc((x.symptoms||[]).join(', ')||'ไม่ได้เลือก')}　<strong>ผลกระทบ:</strong> ${esc(x.impact||'ยังไม่บันทึก')}</p>${x.notes?`<p><strong>หมายเหตุ:</strong> ${esc(x.notes)}</p>`:''}</article>`).join('');box.querySelectorAll('[data-editday]').forEach(b=>b.addEventListener('click',()=>{const x=data.daily.find(z=>z.date===b.dataset.editday);if(x)fillDaily(x)}));box.querySelectorAll('[data-delday]').forEach(b=>b.addEventListener('click',()=>{if(confirm('ลบข้อมูลวันที่ '+dateTH(b.dataset.delday)+' หรือไม่?')){data.daily=data.daily.filter(x=>x.date!==b.dataset.delday);save();renderHistory();renderTrends();renderHome()}}))}
+$('filterHistory').addEventListener('click',()=>{renderHistory();renderTrends()});$('clearHistoryFilter').addEventListener('click',()=>{$('historyFrom').value='';$('historyTo').value='';renderHistory();renderTrends()});
+function renderTrends(){const arr=selectedHistory().slice().reverse(),box=$('trends');if(!arr.length){box.innerHTML='<div class="empty">ยังไม่มีข้อมูลเพียงพอสำหรับสรุปแนวโน้ม</div>';return}const flows=['ไหลช้า','ค่อนข้างช้า','ปานกลาง','ค่อนข้างดี','พุ่งดี'];const vals=arr.filter(x=>x.nightCount!=='').map(x=>Number(x.nightCount));let out='<h3>จำนวนครั้งที่ตื่นปัสสาวะกลางคืน</h3>';if(vals.length){const max=Math.max(1,...vals);out+=arr.filter(x=>x.nightCount!=='').map(x=>`<div class="trendrow"><span>${dateTH(x.date)}</span><div class="barbg"><div class="bar" style="width:${Math.max(0,Math.min(100,Number(x.nightCount)/max*100))}%"></div></div><strong>${esc(x.nightCount)} ครั้ง</strong></div>`).join('')}else out+='<p class="muted">ยังไม่มีจำนวนครั้งที่บันทึก</p>';out+='<h3>ความแรงปัสสาวะที่รายงาน</h3>'+arr.map(x=>`<div class="record"><strong>${dateTH(x.date)}:</strong> ${esc(x.flow||'ยังไม่บันทึก')}</div>`).join('');box.innerHTML=out}
+function resetMedForm(){editingMedId=null;$('medForm').reset();$('medId').value='';$('medDate').value=today();$('medSubmit').textContent='เพิ่มเหตุการณ์ยา';$('medStatus').textContent=''}
+function fillMed(x){editingMedId=x.id;$('medId').value=x.id;$('medName').value=x.name;$('medDose').value=x.dose||'';$('medDate').value=x.date;$('medEvent').value=x.event;$('medReason').value=x.reason||'';$('medNotes').value=x.notes||'';$('medSubmit').textContent='บันทึกการแก้ไข';$('medStatus').textContent='กำลังแก้ไขเหตุการณ์ยา';window.scrollTo({top:0,behavior:'smooth'})}
+$('medForm').addEventListener('submit',e=>{e.preventDefault();const x={id:editingMedId||('med-'+Date.now()+'-'+Math.random().toString(36).slice(2,7)),name:$('medName').value.trim(),dose:$('medDose').value.trim(),date:$('medDate').value,event:$('medEvent').value,reason:$('medReason').value.trim(),notes:$('medNotes').value.trim(),updatedAt:new Date().toISOString()};if(editingMedId){const i=data.meds.findIndex(m=>m.id===editingMedId);if(i>=0)data.meds[i]=x}else data.meds.push(x);data.meds.sort((a,b)=>b.date.localeCompare(a.date));if(save()){$('medStatus').textContent=editingMedId?'แก้ไขเหตุการณ์ยาแล้ว':'เพิ่มเหตุการณ์ยาแล้ว';resetMedForm();renderMeds();renderHome()}});
+$('cancelMedEdit').addEventListener('click',resetMedForm);
+function renderMeds(){const box=$('medList'),arr=data.meds.slice().sort((a,b)=>b.date.localeCompare(a.date));if(!arr.length){box.innerHTML='<div class="empty">ยังไม่มีประวัติยา</div>';return}box.innerHTML=arr.map(x=>`<article class="record"><div class="recordhead"><div><h3>${esc(x.name)} — ${esc(x.event)}</h3><span class="tag">${dateTH(x.date)}</span></div><div class="actions no-print"><button class="btn secondary" data-editmed="${esc(x.id)}">แก้ไข</button><button class="btn danger" data-delmed="${esc(x.id)}">ลบ</button></div></div><p><strong>ขนาดยา / วิธีใช้:</strong> ${esc(x.dose||'ยังไม่บันทึก')}</p><p><strong>เหตุผล / ผู้แนะนำ:</strong> ${esc(x.reason||'ยังไม่บันทึก')}</p>${x.notes?`<p><strong>อาการ / หมายเหตุ:</strong> ${esc(x.notes)}</p>`:''}</article>`).join('');box.querySelectorAll('[data-editmed]').forEach(b=>b.addEventListener('click',()=>{const x=data.meds.find(m=>m.id===b.dataset.editmed);if(x)fillMed(x)}));box.querySelectorAll('[data-delmed]').forEach(b=>b.addEventListener('click',()=>{if(confirm('ลบเหตุการณ์ยานี้หรือไม่? ประวัติอื่นจะไม่ถูกลบ')){data.meds=data.meds.filter(m=>m.id!==b.dataset.delmed);save();renderMeds();renderHome()}}))}
+function reportData(){const f=$('reportFrom').value,t=$('reportTo').value;return {daily:data.daily.filter(x=>(!f||x.date>=f)&&(!t||x.date<=t)).slice().sort((a,b)=>a.date.localeCompare(b.date)),meds:data.meds.filter(x=>(!f||x.date>=f)&&(!t||x.date<=t)).slice().sort((a,b)=>a.date.localeCompare(b.date)),from:f,to:t}}
+function buildReport(){const r=reportData(),name=$('patientLabel').value.trim(),target=$('reportContent');target.classList.remove('hidden');target.innerHTML=`<div class="panel"><h2>รายงานบันทึกอาการปัสสาวะและประวัติยา</h2><p><strong>ชื่อ/รหัสอ้างอิง:</strong> ${esc(name||'ไม่ได้ระบุ')}</p><p><strong>ช่วงวันที่:</strong> ${r.from?dateTH(r.from):'ตั้งแต่เริ่มบันทึก'} ถึง ${r.to?dateTH(r.to):'ปัจจุบัน'}</p><p><strong>ที่มาของข้อมูล:</strong> ผู้ใช้รายงานด้วยตนเอง ไม่ใช่ผลตรวจ Uroflowmetry และไม่ใช่การวินิจฉัยทางการแพทย์</p><h3>บันทึกอาการรายวัน (${r.daily.length} วัน)</h3>${r.daily.length?r.daily.map(x=>`<article class="record"><h3>${dateTH(x.date)}</h3><p><strong>ความแรง:</strong> ${esc(x.flow||'ยังไม่บันทึก')} | <strong>การเบ่ง:</strong> ${esc(x.strain||'ยังไม่บันทึก')} | <strong>ปัสสาวะไม่สุด:</strong> ${esc(x.incomplete||'ยังไม่บันทึก')}</p><p><strong>กลางวัน:</strong> ${x.dayCount!==''?esc(x.dayCount)+' ครั้ง':'ยังไม่บันทึก'} | <strong>กลางคืน:</strong> ${x.nightCount!==''?esc(x.nightCount)+' ครั้ง':'ยังไม่บันทึก'} | <strong>น้ำดื่ม:</strong> ${x.water!==''?esc(x.water)+' มล.':'ยังไม่บันทึก'}</p><p><strong>อาการอื่น:</strong> ${esc((x.symptoms||[]).join(', ')||'ไม่ได้เลือก')}</p><p><strong>การใช้ยา:</strong> ${esc(x.medAdherence||'ยังไม่บันทึก')} | <strong>ผลกระทบ:</strong> ${esc(x.impact||'ยังไม่บันทึก')}</p>${x.notes?`<p><strong>หมายเหตุ:</strong> ${esc(x.notes)}</p>`:''}</article>`).join(''):'<p>ไม่มีข้อมูลรายวันในช่วงนี้</p>'}<h3>ประวัติยา (${r.meds.length} เหตุการณ์)</h3>${r.meds.length?r.meds.map(x=>`<article class="record"><h3>${dateTH(x.date)} — ${esc(x.name)} (${esc(x.event)})</h3><p><strong>ขนาดยา/วิธีใช้:</strong> ${esc(x.dose||'ยังไม่บันทึก')}</p><p><strong>เหตุผล/ผู้แนะนำ:</strong> ${esc(x.reason||'ยังไม่บันทึก')}</p>${x.notes?`<p><strong>อาการ/หมายเหตุ:</strong> ${esc(x.notes)}</p>`:''}</article>`).join(''):'<p>ไม่มีเหตุการณ์ยาในช่วงนี้</p>'}<p><strong>ข้อควรทราบ:</strong> โปรดให้บุคลากรทางการแพทย์พิจารณาข้อมูลนี้ร่วมกับประวัติและผลตรวจอื่น ๆ อย่าหยุดหรือเปลี่ยนยาโดยไม่มีคำแนะนำจากผู้รักษา</p></div>`;return r}
+$('makeReport').addEventListener('click',()=>{const r=buildReport();$('reportStatus').textContent=`เตรียมรายงานแล้ว: อาการ ${r.daily.length} วัน และเหตุการณ์ยา ${r.meds.length} รายการ`;window.print()});
+$('exportData').addEventListener('click',()=>{const payload={format:'UroFlowDiaryBackup',version:2,exportedAt:new Date().toISOString(),data};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='UroFlowDiary-backup-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('reportStatus').textContent='สร้างไฟล์สำรองแล้ว เก็บไฟล์นี้ในที่ปลอดภัย'});
+$('importFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const p=JSON.parse(await file.text()),incoming=p.data;if(!incoming||!Array.isArray(incoming.daily)||!Array.isArray(incoming.meds))throw new Error('รูปแบบไฟล์ไม่ถูกต้อง');if(!confirm('การกู้คืนจะแทนที่ข้อมูลปัจจุบันทั้งหมด ต้องการดำเนินการต่อหรือไม่?'))return;data={daily:incoming.daily,meds:incoming.meds};if(save()){$('reportStatus').textContent='กู้คืนข้อมูลเรียบร้อยแล้ว';renderHome();renderHistory();renderMeds();renderTrends()}}catch(err){alert('อ่านไฟล์สำรองไม่สำเร็จ: '+err.message)}finally{e.target.value=''}});
+$('deleteAll').addEventListener('click',()=>{if(confirm('คำเตือน: ต้องการลบข้อมูล UroFlow Diary ทั้งหมดจากเบราว์เซอร์นี้ใช่หรือไม่? แนะนำให้ดาวน์โหลดไฟล์สำรองก่อน')){if(confirm('ยืนยันครั้งสุดท้าย: การลบนี้ไม่สามารถย้อนกลับได้หากไม่มีไฟล์สำรอง')){data={daily:[],meds:[]};save();renderHome();renderHistory();renderMeds();renderTrends();$('reportContent').classList.add('hidden');$('reportStatus').textContent='ลบข้อมูลจากพื้นที่จัดเก็บของแอปในเบราว์เซอร์นี้แล้ว'}}});
+renderHome();renderHistory();renderMeds();renderTrends();
+})();
+</script>
+</body>
+</html>
